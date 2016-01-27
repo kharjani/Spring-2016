@@ -1,0 +1,11 @@
+Problem 1: 
+(a) 1 and 4
+(b) 1, 2, 3, 4 and 5
+(c) 2
+(d) 2
+
+Problem 2:
+(a) 1, 2 and 3
+(b) git add hw1q2b.cpp
+	git log -3
+(c) records any changes to the repository
