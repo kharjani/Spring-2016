@@ -1,0 +1,43 @@
+Problem 1:
+
+(a) readmemd is unmodified
+(b) readme.md is modified
+	fun_problem.txt is unmodified
+(c) readme.md file is staged
+	fun_problem.txt is staged
+(d) readme.md is modified
+	fun_problem.txt is modified
+(e) readme.md is staged
+	fun_problem.txt is unmodified
+
+(f) fun_problem.txt is blank/empty because 'so far, so good' was added but because of using 'git checkout' the changes were discarded readme.md 	is modified because it has been edited after it was staged. Now you can either stage the modification, or just commit without pushing 
+	the modification to the repository. 
+
+Problem 3:
+
+(a) Outer loop runs Θ(n) times, inner loop runs Θ(log n) times.
+	Therefore the code runtime is Θ(nlogn).
+
+(b) n squared logn
+	Outer most for-loop runs Θ(n) times, second for loop also ends up running Θ(n) times, over a large-enough amount of trials the if statement
+	will be fulfilled enough times to make it arbitrary, and the inner-most for loop runs Θ(log n) times. 
+	Total code runtime is Θ(n²logn).
+
+(c) Outer for-loop runs n/10 times which comes to Θ(n), the number of inner for-loop iterations depends on 'size' which keeps increasing by 
+	a constant and is not related to 'n' so it must be considered as Θ(1).
+	Total code runtime is Θ(n).
+
+(d) Outer for-loop is Θ(n), and as in part (c) the inner for-loop depends on 'size' which now increase by a factor of 2 but is still not
+	related to 'n' and therefore is still considered as Θ(1).
+	Total code runtime is Θ(n).
+
+
+Problem 4:
+
+1. A doubly linked list should be used here. The add and remove functions will never be used, only functions such as get(#0-43) as there have been 44 presidents, and also the preceding() and succeeding() to show the predecessor or successor of the current president the user is looking at. get() function takes Θ(i) for the ith president. 
+
+2. A map where the key is the zipcode and value is population estimate for that zipcode. Complexity for get(key) is logarithmic which is quite efficient. 
+
+3. Assuming there is more data/information to store than just the name of students , a map would be the best choice, where the student's name is the key. 
+
+4. not sure
