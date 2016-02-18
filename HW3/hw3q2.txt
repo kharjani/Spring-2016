@@ -1,0 +1,6 @@
+Problem 2:
+
+(a) worst case runtime is O(n²)
+(b) amortized analysis gives a linear runtime (n)
+(c) amortized analysis gives nlogn 
+(d) amortized analysis of anotherfunc() gives nlogn

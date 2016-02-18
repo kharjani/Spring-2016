@@ -65,10 +65,8 @@ LListInt& LListInt::operator=(const LListInt& other){
 
 LListInt LListInt::operator+(const LListInt& other) const{
 	Item* starter = other->head_;
-	this->tail_->next = starter;
-	this->tail_ = starter;
 
-	for(other->head_; starter != NULL; starter = starter->next){
+	for(; starter != NULL; starter = starter->next){
 		Item* newItem = new Item();
 		this->tail_->next = newItem;
 		newItem->prev = this->tail_;
@@ -77,7 +75,6 @@ LListInt LListInt::operator+(const LListInt& other) const{
 		this->size_++;
 		this->tail_ = this->tail_->next;
 	}
-	//delete newItem;   ??
 	return this;
 }
 
