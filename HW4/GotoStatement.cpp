@@ -7,8 +7,13 @@ GotoStatement::GotoStatement(int lineNum)
 
 void GotoStatement::execute(ProgramState * state, std::ostream &outf)
 {
-	outf << state.getVal(var) << endl;
-	state->incrementCounter();
+	if(state->verifyLineNum(lineNum)){
+		state->setLineNum(lineNum);
+	}
+	else{
+		outf << "Illegal jump instruction" << std::endl;
+		state->setLineNum(0);
+	}
 }
 
 

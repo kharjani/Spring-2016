@@ -4,11 +4,15 @@ using namespace std;
 ProgramState::ProgramState(int m_numLines){
 	programCounter = 0;
 	numLines = m_numLines;
+	stack = new StackInt();
 }
+
+
 
 int ProgramState::getVal(string key){
 	unsigned int size = map.size();
-	int curr = map[key];
+	int curr = map[key]; // curr won't be used, it's just to see if map.size() changes
+	curr++; // to suppress the compiler warning that it is unused
 	if (size != map.size()){ // if size has changed it means map[key] wasn't in the map but has now been created with a default value
 		map[key] = 0;
 	}
@@ -35,7 +39,7 @@ void ProgramState::incrementCounter(){
 
 vector<string> ProgramState::getKeys(){
 	vector<string> keys;
-	map<string,int>::iterator it;
+	typename map<string,int>::iterator it;
 	for (it=map.begin(); it!=map.end(); ++it){
     	keys.push_back(it->first);
 	}
@@ -45,7 +49,7 @@ vector<string> ProgramState::getKeys(){
 
 vector<int> ProgramState::getValues(){
 	vector<int> values;
-	map<string,int>::iterator it;
+	typename map<string,int>::iterator it;
 	for (it=map.begin(); it!=map.end(); ++it){
     	values.push_back(it->second);
 	}
@@ -53,8 +57,37 @@ vector<int> ProgramState::getValues(){
 }
 
 void ProgramState::setLineNum(int lineNum){
-	
+	programCounter = lineNum;
 }
+
+bool ProgramState::verifyLineNum(int lineNum){
+	if(0 > lineNum || lineNum > numLines){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+int ProgramState::getProgramCounter(){
+	return programCounter;
+}
+
+void ProgramState::pushToStack(int lineNum){
+	const int line = lineNum;
+	stack->push(line);
+}
+
+int ProgramState::popFromStack(){
+	if(stack->empty()){
+		return -1;
+	}
+	else{
+		int num = stack->top();
+		stack->pop();
+		return num;
+	}
+}
+
 /*
 bool ProgramState::exists(string key){
 	map<string,int>::iterator it;

@@ -7,10 +7,10 @@
 class GotoStatement: public Statement
 {
 private:
-	int numLines;
+	int lineNum;
 	
 public:
-	GotoStatement(int numLines);
+	GotoStatement(int lineNum);
 	
 	virtual void execute(ProgramState * state, std::ostream &outf);
 };

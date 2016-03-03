@@ -8,7 +8,7 @@ PrintStatement::PrintStatement(std::string variableName)
 
 void PrintStatement::execute(ProgramState * state, std::ostream &outf)
 {
-	outf << state.getVal(var) << endl;
+	outf << state->getVal(var) << std::endl;
 	state->incrementCounter();
 }
 

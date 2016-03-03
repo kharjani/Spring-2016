@@ -44,6 +44,14 @@ public:
 
 	void setLineNum(int numLine);
 
+	bool verifyLineNum(int LineNum);
+
+	int getProgramCounter(); 
+
+	void pushToStack(int lineNum);
+
+	int popFromStack();
+
 	// You'll need to add a variety of methods here.  Rather than trying to
 	// think of what you'll need to add ahead of time, add them as you find
 	// that you need them.
@@ -52,7 +60,9 @@ public:
 private:
 	int numLines;
 	std::map<std::string, int> map;
-	int programCounter; // remember to increment this - or you'll end up with an infinite loop
+	int programCounter; 
+	StackInt *stack;
+
 };
 
 #endif

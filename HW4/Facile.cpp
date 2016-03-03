@@ -7,6 +7,11 @@
 #include "DivStatement.h"
 #include "PrintStatement.h"
 #include "PrintAllStatement.h"
+#include "GoSubStatement.h"
+#include "GotoStatement.h"
+#include "EndStatement.h"
+#include "ReturnStatement.h"
+#include "IfStatement.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -121,25 +126,29 @@ Statement * parseLine(string line)
 		statement = new DivStatement(var, temp);
 	}
 	else if (type == "GOTO"){
-		ss >> val
+		ss >> val;
 		statement = new GotoStatement(val);
 	}
 	else if (type == "IF"){
-		
+		ss >> var;
+		string op;
+		int num;
+		int lineNum;
+		string then;
+		ss >> op >> num >> then >> lineNum;
+		statement = new IfStatement(var, op, num, lineNum);
 	}
 	else if (type == "GOSUB"){
-		
+		ss >> val;
+		statement = new GoSubStatement(val);
 	}
 	else if (type == "RETURN"){
+		statement = new ReturnStatement();
 		
 	}
 	else if (type == "END" || type == "."){
-		
+		statement = new EndStatement(); 
 	}
-
-
-
-
 		
 	return statement;
 }
@@ -147,9 +156,17 @@ Statement * parseLine(string line)
 
 void interpretProgram(istream& inf, ostream& outf)
 {
+	//create program state, pass it and the ostream into the execute function
 	vector<Statement *> program;
 	parseProgram( inf, program );
+	ProgramState * state = new ProgramState(program.size());
+	//while loop - while program counter is not 0, call the execute function (no need for loop)
+	int i=1;
+	while(state->getProgramCounter() != 0){
+		program[i]->execute(state, outf);
+		i++;
+	}
 	
-	// Incomplete;  TODO:  Finish this function!
+	delete state;
 }
 
