@@ -167,6 +167,5 @@ void interpretProgram(istream& inf, ostream& outf)
 		i++;
 	}
 	
-	delete state;
 }
 

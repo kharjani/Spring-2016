@@ -1,0 +1,7 @@
+Error - floor 8 does not exist
+TV
+Textbook
+Laptop
+Book
+Chair
+Error - student has no possessions
