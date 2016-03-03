@@ -98,7 +98,7 @@ int const & LListInt::operator[](int position) const{
 
 LListInt::~LListInt()
 {
-  clear();
+  this->clear();
 }
 
 bool LListInt::empty() const
