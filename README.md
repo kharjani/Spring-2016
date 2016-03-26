@@ -1,5 +1,5 @@
 # CS 104 Student Repository
 
-- **Name**: Tommy Trojan
-- **USC ID**: 1234567890
-- **Email**: ttrojan@usc.edu
+- **Name**: Krish Harjani
+- **USC ID**: 1851531641
+- **Email**: kharjani@usc.edu
