@@ -1,51 +1,51 @@
 // Facile.cpp
-#include "Statement.h"
-#include "LetStatement.h"
-#include "AddStatement.h"
-#include "SubStatement.h"
-#include "MultStatement.h"
-#include "DivStatement.h"
-#include "PrintStatement.h"
-#include "PrintAllStatement.h"
-#include "GoSubStatement.h"
-#include "GotoStatement.h"
-#include "EndStatement.h"
-#include "ReturnStatement.h"
-#include "IfStatement.h"
+
+#include "Facile.h"
 #include <vector>
 #include <string>
 #include <iostream>
 #include <sstream> 
 #include <fstream>
 #include <cstdlib>
+#include <map>
 
 
 using namespace std;
 
+void parseProgram(istream& inf, vector<Statement *> & program);
+Statement * parseLine(string line);
+
+Facile::Facile(string file){
+	filename = filename;
+	inf = ifstream infile(filename.c_str());
+	outf = cout;
+    if (!infile){goodFile = false;}
+
+    parseProgram();
+    
+
+    
+}
+
 // parseProgram() takes a filename as a parameter, opens and reads the
 // contents of the file, and returns an vector of pointers to Statement.
-void parseProgram(istream& inf, vector<Statement *> & program);
+
 
 // parseLine() takes a line from the input file and returns a Statement
 // pointer of the appropriate type.  This will be a handy method to call
 // within your parseProgram() method.
-Statement * parseLine(string line);
+
+
+bool Facile::verifiedFile(){
+	return goodFile;
+}
 
 // interpretProgram() reads a program from the given input stream
 // and interprets it, writing any output to the given output stream.
 // Note:  you are required to implement this function!
-void interpretProgram(istream& inf, ostream& outf);
 
 
-int main(string filename)
-{
 
-        ifstream infile(filename.c_str());
-        if (!infile) return 1;
-       
-        interpretProgram(infile, cout);
-
-}
 /*
 int main(int argc, char* argv[])
 {
@@ -79,20 +79,21 @@ int main(int argc, char* argv[])
 
 
 
-void parseProgram(istream &inf, vector<Statement *> & program)
+void Facile::parseProgram()
 {
 	program.push_back(NULL);
-	
 	string line;
 	while( ! inf.eof() )
 	{
 		getline(inf, line);
+		QString codeLine = line;
+		code << line;
 		program.push_back( parseLine( line ) );
 	}
 }
 
 
-Statement * parseLine(string line)
+Statement * Facile::parseLine(string line)
 {
 	Statement * statement;	
 	stringstream ss;
@@ -181,10 +182,9 @@ Statement * parseLine(string line)
 }
 
 
-void interpretProgram(istream& inf, ostream& outf)
+void Facile::interpretProgram()
 {
 	//create program state, pass it and the ostream into the execute function
-	vector<Statement *> program;
 	parseProgram( inf, program );
 	ProgramState * state = new ProgramState(program.size());
 	//while loop - while program counter is not 0, call the execute function
@@ -193,4 +193,46 @@ void interpretProgram(istream& inf, ostream& outf)
 	}
 	
 }
+
+QStringList* Facile::getCode(){
+	return code;
+}
+
+void Facile::continue(QList* breakLines){
+	while((!breakLines.contains(state->getProgramCounter)
+		&& (state->getProgramCounter() != 0)){
+		program[state->getProgramCounter()]->execute(state, outf);
+	}
+}
+
+void Facile::step(){
+	program[getProgramCounter()]->execute(state, outf);
+}
+
+void Facile::next(bool isGosub, QList* breakLines){
+	int curr = state->getProgramCounter();
+	if(isGosub){
+		while((state->getProgramCounter() != curr+1) && (!breakLines.contains(state->getProgramCounter))){
+		program[state->getProgramCounter()]->execute(state, outf);
+		}
+	}
+	else{
+		program[getProgramCounter()]->execute(state, outf);
+	}
+}
+
+int Facile::getCurrentLine(){
+	return state->getProgramCounter();
+}
+
+map<string, int>* Facile::getMap(){
+	map<string, int> *map;
+	vector<int> values = state->getValues();
+	vector<string> keys = state->getKeys();
+	for(int i=0; i < values.size(); i++){
+		map->insert(pair<string, int>(keys[i],values[i]));
+	}
+	return map;
+}
+
 

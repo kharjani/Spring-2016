@@ -15,6 +15,7 @@ class LoadWindow : public QWidget
 public:
 	LoadWindow();
 	~LoadWindow();
+	string getFilename();
 
 private slots:
 	void startProgram();

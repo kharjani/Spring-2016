@@ -9,12 +9,15 @@ int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
 
-	LoadWindow LoadWindow;
-	ErrorWindow ErrorWindow;
-	DebuggerWindow DebuggerWindow;
-	ValuesWindow ValuesWindow;
+
+	DebuggerWindow DebuggerWindow; //use this to manage the other windows
+	
 
 	LoadWindow.show();
+
+	//turn facile into a class, create instance of it in the debugger window, 
+	//pass in filename through constructor - (need new public member functions
+	// like continue, step, next etc. member data: programstate)
 
 	
 

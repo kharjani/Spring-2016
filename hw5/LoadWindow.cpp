@@ -37,17 +37,10 @@ LoadWindow::LoadWindow(){
 	overallLayout->addLayout(buttonLayout);
 
 	setLayout(overallLayout);
-	show();
 }
 
 LoadWindow::~LoadWindow(){
-	delete overallLayout;
-	delete buttonLayout;
-	delete header;
-	delete startButton;
-	delete quitButton;
-	delete filenameLabel;
-	delete filenameInput;
+	
 
 }
 
@@ -58,4 +51,7 @@ void LoadWindow::startProgram(QLineEdit* filenameInput){
 void LoadWindow::quitProgram(){
 	QApplication::exit( );
 
+}
+string LoadWindow::getFilename(){
+	return filenameInput->text().toStdString();
 }
